@@ -21,7 +21,24 @@ export class StudentService {
         });
 
         return await this.repostory.save(student);
+    }
 
+    async getStudents(): Promise<Student[]> {
+        return this.repostory.find();
+    }
+
+    async getStudent(id: string): Promise<Student> {
+        return this.repostory.findOne({ id });
+    }
+
+    async getManyStudents(ids: string[]): Promise<Student[]>  {
+        return this.repostory.find({
+            where: {
+                id: {
+                    $in: ids
+                }
+            }
+        })
     }
 
 }
