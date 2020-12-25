@@ -12,17 +12,6 @@ export class StudentService {
         @InjectRepository(Student) private repostory: Repository<Student>
     ) {}
 
-    async createStudent( input: CreateStudentInput): Promise<Student> {
-        const {firstName, lastName} = input;
-        const student = this.repostory.create({
-            id: uuid(),
-            firstName,
-            lastName
-        });
-
-        return await this.repostory.save(student);
-    }
-
     async getStudents(): Promise<Student[]> {
         return this.repostory.find();
     }
@@ -41,4 +30,14 @@ export class StudentService {
         })
     }
 
+    async createStudent( input: CreateStudentInput): Promise<Student> {
+        const {firstName, lastName} = input;
+        const student = this.repostory.create({
+            id: uuid(),
+            firstName,
+            lastName
+        });
+
+        return await this.repostory.save(student);
+    }
 }
